@@ -1,0 +1,75 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7108"
+  },
+  "Routes": [
+    //ACCOUNT WEB API
+    {
+      //Define a URL ou padrão de rota que o Ocelot irá utilizar para indicar que deve ser chamado
+      //o microserviço definido nos atributos Downstream
+      "UpstreamPathTemplate": "/api/account",
+      //Define metodos HTTP aceitos e roteados
+      "UpstreamHttpMethod": [ "Post" ],
+      //Define a URL que será utilizada na criação da requisição para o microserviço
+      "DownstreamPathTemplate": "/Account",
+      //Define o schema ou protocolo  usado na request para o microserviço
+      "DownstreamScheme": "https",
+      //Define o Host e as portas(Port) utilizada na requisição para o microservico(API de destino)
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7179
+        }
+      ]
+    },
+    //PERSON WEB API
+    {
+      //Define a URL ou padrão de rota que o Ocelot irá utilizar para indicar que deve ser chamado
+      //o microserviço definido nos atributos Downstream
+      "UpstreamPathTemplate": "/api/person",
+      //Define metodos HTTP aceitos e roteados
+      "UpstreamHttpMethod": [ "Get" ],
+      //Define a URL que será utilizada na criação da requisição para o microserviço
+      "DownstreamPathTemplate": "/Person",
+      //Define o schema ou protocolo  usado na request para o microserviço
+      "DownstreamScheme": "https",
+      //Define o Host e as portas(Port) utilizada na requisição para o microservico(API de destino)
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7014
+        }
+      ]
+    },
+    //STUDENT WEB API
+    {
+
+      //Define a URL ou padrão de rota que o Ocelot irá utilizar para indicar que deve ser chamado
+      //o microserviço definido nos atributos Downstream
+      "UpstreamPathTemplate": "/api/student",
+      //Define metodos HTTP aceitos e roteados
+      "UpstreamHttpMethod": [ "Get" ],
+      //Define a URL que será utilizada na criação da requisição para o microserviço
+      "DownstreamPathTemplate": "/Student",
+      //Define o schema ou protocolo  usado na request para o microserviço
+      "DownstreamScheme": "https",
+      //Define o Host e as portas(Port) utilizada na requisição para o microservico(API de destino)
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7182
+        }
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      "AddHeadersToRequest": {
+        "AccessToken": "Claims[AccessToken] > value[0] > |"
+      },
+      "DelegatingHandlers": [
+        "HeaderDelegatingHandler"
+      ]
+    }
+  ]
+}
